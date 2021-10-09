@@ -68,50 +68,50 @@ $(function () {
         return validateR() && validateX() && validateY();
     }
 
-    function zoom(r) {
-        let section1 = $("#section-1");
-        let section2 = $("#section-2");
-        let section3 = $("#section-3");
-        let midUp = $("[name='mid-up']");
-        let midLow = $("[name='mid-low']");
-        let left = $("[name='left']");
-        let right = $("[name='right']");
-        let muText = $("[name='mid-up-text']");
-        let mlText = $("[name='mid-low-text']");
-        let lText = $("[name='left-text']");
-        let rText = $("[name='right-text']");
-        let d = "M182,178 L" + (330 - 33 * (r - 1)) + ",178   A200,200 0 0,0   182," + (30 + 33 * (r - 1)) + "  z";
-        let points1 = "178 178, 178 " + (30 + 33 * (r - 1)) + "," + (30 + 33 * (r - 1)) + " 178";
-        let rectX = 28 + 33 * (r - 1);
-        let rectWidth = 150 - 30 * (r - 1);
-        section1.attr("d", d);
-        section2.attr("points", points1);
-        section3.attr("x", rectX);
-        section3.attr("width", rectWidth);
-        section3.attr("height", rectWidth);
-        // for (let i = 0; i < 2; i++) {
-        //     let y = $(midUp[i]).attr("y1") + 33 * (r - 1);
-        //     $(midUp[i]).attr("y1", y);
-        //     y = $(midUp[i]).attr("y2") + 33 * (r - 1);
-        //     $(midUp[i]).attr("y2", y);
-        //     y = $(midLow[i]).attr("y1") - 33 * (r - 1);
-        //     $(midLow[i]).attr("y1", y);
-        //     y = $(midLow[i]).attr("y2") - 33 * (r - 1);
-        //     $(midLow[i]).attr("y2", y);
-        //     let x = $(left[i]).attr("x1") + 33 * (r - 1);
-        //     $(left[i]).attr("x1", x);
-        //     x = $(left[i]).attr("x2") + 33 * (r - 1);
-        //     $(left[i]).attr("x2", x);
-        //     x = $(right[i]).attr("x1") - 33 * (r - 1);
-        //     $(right[i]).attr("x1", x);
-        //     x = $(right[i]).attr("x2") - 33 * (r - 1);
-        //     $(right[i]).attr("x2", x);
-        //     y = $(muText[i]).attr("y") + 33 * (r-1);
-        //     $(muText[i]).attr("y", y);
-        //     y = $(mlText[i]).attr("y") + 33 * (r-1);
-        //     $(mlText[i]).attr("y", y);
-        // }
-    }
+    // function zoom(r) {
+    //     let section1 = $("#section-1");
+    //     let section2 = $("#section-2");
+    //     let section3 = $("#section-3");
+    //     let midUp = $("[name='mid-up']");
+    //     let midLow = $("[name='mid-low']");
+    //     let left = $("[name='left']");
+    //     let right = $("[name='right']");
+    //     let muText = $("[name='mid-up-text']");
+    //     let mlText = $("[name='mid-low-text']");
+    //     let lText = $("[name='left-text']");
+    //     let rText = $("[name='right-text']");
+    //     let d = "M182,178 L" + (330 - 33 * (r - 1)) + ",178   A200,200 0 0,0   182," + (30 + 33 * (r - 1)) + "  z";
+    //     let points1 = "178 178, 178 " + (30 + 33 * (r - 1)) + "," + (30 + 33 * (r - 1)) + " 178";
+    //     let rectX = 28 + 33 * (r - 1);
+    //     let rectWidth = 150 - 32.5 * (r - 1);
+    //     section1.attr("d", d);
+    //     section2.attr("points", points1);
+    //     section3.attr("x", rectX);
+    //     section3.attr("width", rectWidth);
+    //     section3.attr("height", rectWidth);
+    //     // for (let i = 0; i < 2; i++) {
+    //     //     let y = $(midUp[i]).attr("y1") + 33 * (r - 1);
+    //     //     $(midUp[i]).attr("y1", y);
+    //     //     y = $(midUp[i]).attr("y2") + 33 * (r - 1);
+    //     //     $(midUp[i]).attr("y2", y);
+    //     //     y = $(midLow[i]).attr("y1") - 33 * (r - 1);
+    //     //     $(midLow[i]).attr("y1", y);
+    //     //     y = $(midLow[i]).attr("y2") - 33 * (r - 1);
+    //     //     $(midLow[i]).attr("y2", y);
+    //     //     let x = $(left[i]).attr("x1") + 33 * (r - 1);
+    //     //     $(left[i]).attr("x1", x);
+    //     //     x = $(left[i]).attr("x2") + 33 * (r - 1);
+    //     //     $(left[i]).attr("x2", x);
+    //     //     x = $(right[i]).attr("x1") - 33 * (r - 1);
+    //     //     $(right[i]).attr("x1", x);
+    //     //     x = $(right[i]).attr("x2") - 33 * (r - 1);
+    //     //     $(right[i]).attr("x2", x);
+    //     //     y = $(muText[i]).attr("y") + 33 * (r-1);
+    //     //     $(muText[i]).attr("y", y);
+    //     //     y = $(mlText[i]).attr("y") + 33 * (r-1);
+    //     //     $(mlText[i]).attr("y", y);
+    //     // }
+    // }
 
     // function clearCanvas() {
     //     canvas[0].getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
@@ -145,7 +145,6 @@ $(function () {
 
     $("#send").on("click", function (event) {
         if (!validateForm()) {
-            alert("INvalid!")
             event.preventDefault();
         } else {
             // let x = $("input[type='radio'][name='x']:checked").val();
@@ -160,7 +159,8 @@ $(function () {
     });
 
     $('input[type=checkbox][name=r]').change(function () {
-        let pointers = document.getElementsByName("pointer");
+        // let pointers = document.getElementsByName("pointer");
+        let pointers = $("[name='pointer']");
         let curR = $('input[type=checkbox][name=r]:checked').val();
         let initX;
         let initY;
@@ -172,13 +172,13 @@ $(function () {
             initY = pointers[i].dataset.y;
             moveX = 180 + 150 * initX / Math.abs(curR);
             moveY = 180 - 150 * initY / Math.abs(curR);
-            pointers[i].setAttribute("cx", moveX);
-            pointers[i].setAttribute("cy", moveY);
+            // pointers[i].setAttribute("cx", moveX);
+            // pointers[i].setAttribute("cy", moveY);
             // initR = pointers[i].dataset.r;
-            // pointers[i].animate({
-            //     cx: 180 + moveX,
-            //     cy: 180 - moveY
-            // }, {duration: 500, queue: false});
+            $(pointers[i]).animate({
+                cx: moveX,
+                cy: moveY
+            }, {duration: 500, queue: false});
         }
     });
 

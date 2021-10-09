@@ -64,12 +64,12 @@
                 <text class="graph-base" fill="white" x="160" y="20">Y</text>
                 <text name="mid-up-text" class="graph-base" fill="white" x="193" y="35">R</text>
                 <text name="mid-up-text" class="graph-base" fill="white" x="193" y="110">R/2</text>
-                <text name="mid-low-text" class="graph-base" fill="white" x="193" y="260">-R</text>
-                <text name="mid-low-text" class="graph-base" fill="white" x="193" y="335">-R/2</text>
+                <text name="mid-low-text" class="graph-base" fill="white" x="193" y="260">-R/2</text>
+                <text name="mid-low-text" class="graph-base" fill="white" x="193" y="335">-R</text>
                 <text name="right-text" class="graph-base" fill="white" x="325" y="167">R</text>
                 <text name="right-text" class="graph-base" fill="white" x="245" y="167">R/2</text>
-                <text name="left-text" class="graph-base" fill="white" x="100" y="167">-R</text>
-                <text name="left-text" class="graph-base" fill="white" x="20" y="167">-R/2</text>
+                <text name="left-text" class="graph-base" fill="white" x="100" y="167">-R/2</text>
+                <text name="left-text" class="graph-base" fill="white" x="20" y="167">-R</text>
                 <%
                     for (int i = 0; i < results.size(); i++) {
                         Result result = results.get(i);

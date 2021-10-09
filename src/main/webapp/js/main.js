@@ -11,6 +11,7 @@ $(function () {
     });
 
     function killSwitch() {
+        drawPoint(100, 100);
         $("div.cursor").replaceWith("<video id=\"player\" controls></video>");
         player.src = "media/udied.mp4";
         player.load();
@@ -67,24 +68,45 @@ $(function () {
         return validateR() && validateX() && validateY();
     }
 
-    function clearCanvas() {
-        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    }
+    // function clearCanvas() {
+    //     canvas[0].getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    // }
 
-    function paintPoint(x, y) {
-        let context = canvas.getContext('2d');
-        if (currentCanvasFill > maxCanvasFill)
-            clearCanvas();
-        context.globalAlpha = 0.85;
-        context.beginPath();
-        context.arc(x, y, 10, 0, Math.PI*2);
-        context.fillStyle = "#cca484";
-        context.strokeStyle = "#5b504f";
-    }
+    // function paintPoint(x, y) {
+    //     let context = canvas[0].getContext('2d');
+    //     if (currentCanvasFill > maxCanvasFill)
+    //         clearCanvas();
+    //     context.globalAlpha = 0.85;
+    //     context.beginPath();
+    //     context.arc(x, y, 10, 0, Math.PI*2);
+    //     context.fillStyle = "#cca484";
+    //     context.strokeStyle = "#5b504f";
+    //     currentCanvasFill += 1;
+    // }
+
+    // function computeMovement(x, coef, r) {
+    //     return 180 + coef * x * 150 / Math.abs(r);
+    // }
+
+    // function drawPoint(x,y) {
+    //     let cloned = $("#pointer")[0].cloneNode(true);
+    //     cloned.opacity = 1;
+    //     $("#graph-svg")[0].appendChild(cloned);
+    //     cloned.animate({
+    //         cx: 180 + x,
+    //         cy: 180 + y
+    //     }, 2000);
+    // }
 
     $("#send").on("click", function (event) {
         if (!validateForm()) {
+            alert("INvalid!")
             event.preventDefault();
+        } else {
+            // let x = $("input[type='radio'][name='x']:checked").val();
+            // let y = $('#y').val().replace(',', '.');
+            // let r = $('input[type="checkbox"]:checked').val();
+            // drawPoint(computeMovement(x, 1, r), computeMovement(y, -1, r));
         }
     });
 
@@ -92,8 +114,28 @@ $(function () {
         $("#c-id").val("true");
     });
 
-    canvas.on("click", function (event) {
-        if (!validateR()) return;
-
+    $('input[type=checkbox][name=r]').change(function () {
+        let pointers = document.getElementsByName("pointer");
+        let curR = $('input[type=checkbox][name=r]:checked').val();
+        let initX;
+        let initY;
+        let moveX;
+        let moveY;
+        for (let i = 0; i < pointers.length; i++) {
+            initX = pointers[i].dataset.x;
+            initY = pointers[i].dataset.y;
+            moveX = 180 + 150 * initX / Math.abs(curR);
+            moveY = 180 - 150 * initY / Math.abs(curR);
+            alert(moveX);
+            alert(moveY);
+            pointers[i].setAttribute("cx", moveX);
+            pointers[i].setAttribute("cy", moveY);
+            // initR = pointers[i].dataset.r;
+            // pointers[i].animate({
+            //     cx: 180 + moveX,
+            //     cy: 180 - moveY
+            // }, {duration: 500, queue: false});
+        }
     });
+
 });

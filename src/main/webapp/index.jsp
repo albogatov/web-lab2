@@ -70,7 +70,15 @@
                 <text class="graph-base" fill="white" x="245" y="167">R/2</text>
                 <text class="graph-base" fill="white" x="100" y="167">-R</text>
                 <text class="graph-base" fill="white" x="20" y="167">-R/2</text>
-                <circle cx="180" cy="180" r="5" id="pointer"></circle>
+                <%
+                    for (int i = 0; i < results.size(); i++) {
+                        Result result = results.get(i);
+                %>
+                <circle cx="<%=180+150*result.getX()/Math.abs(result.getR())%>" cy="<%=180-150*result.getY()/Math.abs(result.getR())%>"
+                        data-x="<%=result.getX()%>" data-y="<%=result.getY()%>" data-r="<%=result.getR()%>" r="5" name="pointer" class="pointer"></circle>
+                <%
+                    }
+                %>
             </svg>
         </td>
         <td width="40%" id="choice-cell" class="choice">
@@ -125,37 +133,11 @@
                         <td class="input-r">
                             <fieldset id="r-field">
                                 <label>Select R value</label>
-                                <!--
-                                                                <table class="value-button-table">
-                                                                    <tr>
-                                                                        <td colspan="5">
-                                                                            <p>Select R value</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <input class="input-button" type="button" name="rvalue" value="1">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="input-button" type="button" name="rvalue" value="1.5">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="input-button" type="button" name="rvalue" value="2">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="input-button" type="button" name="rvalue" value="2.5">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="input-button" type="button" name="rvalue" value="3">
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                -->
                                 <input type="checkbox" name="r" value="1">1
                                 <input type="checkbox" name="r" value="2">2
                                 <input type="checkbox" name="r" value="3">3
                                 <input type="checkbox" name="r" value="4">4
-                                <input type="checkbox" name="r" value="1">5
+                                <input type="checkbox" name="r" value="5">5
                             </fieldset>
                         </td>
                     </tr>

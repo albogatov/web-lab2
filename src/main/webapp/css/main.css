@@ -19,7 +19,7 @@ body {
 	background-color: #cdac8a;
 	margin: 0%;
     padding: 0%;
-    border: 0%;
+    border: 0;
     font: inherit;
     vertical-align: baseline;
 }
@@ -46,13 +46,13 @@ body {
 	fill-opacity: 0.5;
 }
 
-#pointer {
+.pointer {
 	fill: #cca484;
 	stroke: #5b504f;
 	stroke-width: 1;
 }
 
-#pointer:hover {
+.pointer:hover {
     fill-opacity: 0.5;
 }
 

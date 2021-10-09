@@ -12,22 +12,31 @@ import data.Result;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        System.out.println("Entered Area Check");
         long begin = System.nanoTime();
-        String xVal = req.getParameter("x");
-        String yVal = req.getParameter("y").replace(",", ".");
-        String rVal = req.getParameter("r");
+        String xVal;
+        String yVal;
+        String rVal;
+        if (req.getParameter("canvas-x").equals("") || req.getParameter("canvas-y").equals("")) {
+            xVal = req.getParameter("x");
+            yVal = req.getParameter("y").replace(",", ".");
+            rVal = req.getParameter("r");
+        } else {
+            xVal = req.getParameter("canvas-x");
+            yVal = req.getParameter("canvas-y").replace(",", ".");
+            rVal = req.getParameter("r");
+        }
+
         HttpSession session = req.getSession();
 
 
         boolean isValid = validateData(xVal, yVal, rVal);
         if (isValid) {
-            System.out.println("Form validated");
             double x = Double.parseDouble(xVal);
             double y = Double.parseDouble(yVal);
             double r = Double.parseDouble(rVal);
@@ -35,14 +44,12 @@ public class AreaCheckServlet extends HttpServlet {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
             Date date = new Date(System.currentTimeMillis());
             String currentTime = formatter.format(date);
-            double executionTime = System.nanoTime() - begin;
-            Result result = new Result(x, y, r, currentTime, executionTime, hit);
+            long executionTime = System.nanoTime() - begin;
+            Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, TimeUnit.MILLISECONDS.convert(executionTime, TimeUnit.NANOSECONDS), hit);
             ArrayList<Result> results;
             if (session.getAttribute("results") == null) {
-                System.out.println("Array init");
                 results = new ArrayList<>();
             } else {
-                System.out.println("Array init 2");
                 results = (ArrayList<Result>) session.getAttribute("results");
             }
             results.add(result);

@@ -9,12 +9,10 @@ import java.io.IOException;
 public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        System.out.println("Entered Post" + req.getParameter("x") + req.getParameter("y") + req.getParameter("r"));
         if (req.getParameter("clean-indicator") != null && req.getParameter("clean-indicator").equals("true")) {
-            System.out.println("Forwarding to clearing");
             getServletContext().getNamedDispatcher("ClearTableServlet").forward(req, res);
-        } else if (req.getParameter("x") != null && req.getParameter("y") != null && req.getParameter("r") != null) {
-            System.out.println("Forwarding to checking");
+        } else if ((req.getParameter("x") != null && req.getParameter("y") != null && req.getParameter("r") != null) ||
+                req.getParameter("canvas-x") != null && req.getParameter("canvas-y") != null && req.getParameter("r") != null) {
             getServletContext().getNamedDispatcher("AreaCheckServlet").forward(req, res);
         } else req.getRequestDispatcher("/index.jsp").forward(req, res);
     }

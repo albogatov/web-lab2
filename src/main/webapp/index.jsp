@@ -1,6 +1,13 @@
+<%@ page import="data.Result" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en-US">
+<%
+    ArrayList<Result> results = new ArrayList<>();
+    if (request.getSession().getAttribute("results") != null)
+        results = (ArrayList<Result>) request.getSession().getAttribute("results");
+%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +40,7 @@
     </tr>
     <tr class="main-content">
         <td width="50%" id="graph-cell" class="graph">
+            <canvas id="graph-canvas" width="360" height="360"></canvas>
             <svg id="graph-svg" width="360" height="360" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <line class="graph-base" stroke="white" x1="180" x2="180" y1="0" y2="360" stroke-width="3"/>
                 <line class="graph-base" stroke="white" x1="0" x2="360" y1="180" y2="180" stroke-width="3"/>
@@ -63,8 +71,15 @@
             </svg>
         </td>
         <td width="40%" id="choice-cell" class="choice">
-            <form method="get" id="input-form">
+            <form method="post" id="input-form" action="/Lab2-1.0-SNAPSHOT">
                 <table>
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <p id="error-info">Enter your values or click on the graph</p>
+                            </fieldset>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="input-y">
                             <fieldset id="y-field">
@@ -147,7 +162,7 @@
                                 <table class="comm-button-table">
                                     <tr>
                                         <td colspan="1">
-                                            <input class="input-button" type="submit" value="Submit">
+                                            <input id="send" class="input-button" type="submit" value="Submit">
                                         </td>
                                         <td colspan="1">
                                             <input id="res" class="input-button" type="reset" value="Reset">
@@ -161,12 +176,16 @@
             </form>
         </td>
         <td width="10%" id="request-cell" class="request-button-table">
-            <button class="input-button" id="clean">Clean table</button>
+            <form method="post" action="/Lab2-1.0-SNAPSHOT">
+                <input type="submit" class="input-button" id="clean-button" value="Clean table">
+                <input type="hidden" value="" name="clean-indicator" id="c-id">
+            </form>
         </td>
     </tr>
     <tr>
         <td colspan="3">
             <table width="100%" id="result-table" class="result-table">
+                <thead>
                 <tr>
                     <th>X</th>
                     <th>Y</th>
@@ -175,6 +194,42 @@
                     <th>Execution time</th>
                     <th>Hit detect</th>
                 </tr>
+                </thead>
+                <tbody>
+                <%
+                    for (int i = 0; i < results.size(); i++) {
+                    Result result = results.get(i);
+                    //out.println(actor.getId());
+                    //out.println(actor.getFirstname());
+                    //out.println(actor.getLastname());
+                %>
+                <tr>
+                    <td><%=result.getX()%>
+                    </td>
+                    <td><%=result.getY()%>
+                    </td>
+                    <td><%=result.getR()%>
+                    </td>
+                    <td><%=result.getCurrTime()%>
+                    </td>
+                    <td><%=result.getExecutionTime()%>
+                    </td>
+                    <td><%=result.getHit()%>
+                    </td>
+                </tr>
+                <%
+                    }
+                    ;
+                %>
+                </tbody>
+                <%--                <tr>--%>
+                <%--                    <td>${sessionScope.xvalue}</td>--%>
+                <%--                    <td>${sessionScope.yvalue}</td>--%>
+                <%--                    <td>${sessionScope.rvalue}</td>--%>
+                <%--                    <td>${sessionScope.current}</td>--%>
+                <%--                    <td>${sessionScope.executon}</td>--%>
+                <%--                    <td>${sessionScope.hit}</td>--%>
+                <%--                </tr>--%>
             </table>
         </td>
     </tr>

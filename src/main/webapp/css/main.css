@@ -31,6 +31,13 @@ body {
     position:relative;
 }
 
+#graph-svg {
+	 position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
 .paint {
 	fill: #8e7062;
 }

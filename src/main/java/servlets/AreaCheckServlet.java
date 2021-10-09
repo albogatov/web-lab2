@@ -1,21 +1,49 @@
-package com.example.Lab2;
+package servlets;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+
+import data.Result;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class AreaCheckServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) {
-        String x = req.getParameter("xvalue");
-        String y = req.getParameter("yvalue");
-        String r = req.getParameter("rvalue");
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        long begin = System.nanoTime();
+        String xVal = req.getParameter("x");
+        String yVal = req.getParameter("y").replace(",", ".");
+        String rVal = req.getParameter("r");
+        HttpSession session = req.getSession();
 
-        boolean isValid = validateData(x, y, r);
-        if  (isValid) {
 
+        boolean isValid = validateData(xVal, yVal, rVal);
+        if (isValid) {
+            double x = Double.parseDouble(xVal);
+            double y = Double.parseDouble(yVal);
+            double r = Double.parseDouble(rVal);
+            boolean hit = checkHit(x, y, r);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+            Date date = new Date(System.currentTimeMillis());
+            String currentTime = formatter.format(date);
+            double executionTime = System.nanoTime() - begin;
+            Result result = new Result(x, y, r, currentTime, executionTime, hit);
+            ArrayList<Result> results;
+            if (session.getAttribute("results") == null) {
+                results = new ArrayList<>();
+            } else {
+                results = (ArrayList<Result>) session.getAttribute("results");
+            }
+            results.add(result);
         }
+        req.getRequestDispatcher("/index.jsp").forward(req, res);
     }
 
     private boolean validateData(String x, String y, String r) {

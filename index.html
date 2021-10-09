@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web Lab #1</title>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/jquery.svg.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.svg.css">
+    <script src="src/main/webapp/js/jquery-3.6.0.min.js"></script>
+    <script src="src/main/webapp/js/main.js"></script>
+    <script src="src/main/webapp/js/jquery.svg.js"></script>
+    <link rel="stylesheet" type="text/css" href="src/main/webapp/css/main.css">
+    <link rel="stylesheet" type="text/css" href="src/main/webapp/css/jquery.svg.css">
 </head>
 <body>
 <table id="grid" width="100%">
@@ -32,7 +32,8 @@
     </tr>
     <tr class="main-content">
         <td width="50%" id="graph-cell" class="graph">
-            <svg id="graph-svg" width="360" height="360" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			<canvas id="graph-canvas" width="360" height="360"></canvas>
+			 <svg id="graph-svg" width="360" height="360" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <line class="graph-base" stroke="white" x1="180" x2="180" y1="0" y2="360" stroke-width="3"/>
                 <line class="graph-base" stroke="white" x1="0" x2="360" y1="180" y2="180" stroke-width="3"/>
                 <rect class="paint" x="28" y="182" width="150" height="150" fill-opacity="0.8"/>
@@ -64,6 +65,13 @@
         <td width="40%" id="choice-cell" class="choice">
             <form method="get" id="input-form">
                 <table>
+					<tr>
+						<td>
+							<fieldset>
+								<p id="error-info">Enter your values or click on the graph</p>
+							</fieldset>
+					  </td>
+					</tr>
                     <tr>
                         <td class="input-y">
                             <fieldset id="y-field">
@@ -160,7 +168,9 @@
             </form>
         </td>
         <td width="10%" id="request-cell" class="request-button-table">
-            <button class="input-button" id="clean">Clean table</button>
+			<form>
+            	<input type="submit" class="input-button" name="clean" value="Clean table">
+			</form>
         </td>
     </tr>
     <tr>

@@ -15,16 +15,8 @@
         <servlet-name>AreaCheckServlet</servlet-name>
         <servlet-class>servlets.AreaCheckServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>AreaCheckServlet</servlet-name>
-        <url-pattern>/check</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>ClearTableServlet</servlet-name>
         <servlet-class>servlets.ClearTableServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ClearTableServlet</servlet-name>
-        <url-pattern>/clear</url-pattern>
-    </servlet-mapping>
 </web-app>

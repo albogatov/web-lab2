@@ -17,6 +17,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        System.out.println("Entered Area Check");
         long begin = System.nanoTime();
         String xVal = req.getParameter("x");
         String yVal = req.getParameter("y").replace(",", ".");
@@ -26,6 +27,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         boolean isValid = validateData(xVal, yVal, rVal);
         if (isValid) {
+            System.out.println("Form validated");
             double x = Double.parseDouble(xVal);
             double y = Double.parseDouble(yVal);
             double r = Double.parseDouble(rVal);
@@ -37,11 +39,14 @@ public class AreaCheckServlet extends HttpServlet {
             Result result = new Result(x, y, r, currentTime, executionTime, hit);
             ArrayList<Result> results;
             if (session.getAttribute("results") == null) {
+                System.out.println("Array init");
                 results = new ArrayList<>();
             } else {
+                System.out.println("Array init 2");
                 results = (ArrayList<Result>) session.getAttribute("results");
             }
             results.add(result);
+            session.setAttribute("results", results);
         }
         req.getRequestDispatcher("/index.jsp").forward(req, res);
     }

@@ -5,8 +5,11 @@
 <html lang="en-US">
 <%
     ArrayList<Result> results = new ArrayList<>();
-    if (request.getSession().getAttribute("results") != null)
+    if (request.getSession().getAttribute("results") != null) {
+        System.out.println("Results are not null");
+        System.out.println(results);
         results = (ArrayList<Result>) request.getSession().getAttribute("results");
+    } else System.out.println("null");
 %>
 <head>
     <meta charset="utf-8">
@@ -35,7 +38,7 @@
             Group: P3233
         </th>
         <th class="header-cell">
-            Variant: 33001
+            Variant: 33673
         </th>
     </tr>
     <tr class="main-content">
@@ -84,7 +87,7 @@
                         <td class="input-y">
                             <fieldset id="y-field">
                                 <label for="y">Input Y value</label>
-                                <input maxlength="10" size="22" type="text" id="y" name="yvalue"
+                                <input maxlength="10" size="22" type="text" id="y" name="y"
                                        placeholder="Y must be in the range of (-3;3)"><br>
                             </fieldset>
                         </td>
@@ -199,9 +202,6 @@
                 <%
                     for (int i = 0; i < results.size(); i++) {
                     Result result = results.get(i);
-                    //out.println(actor.getId());
-                    //out.println(actor.getFirstname());
-                    //out.println(actor.getLastname());
                 %>
                 <tr>
                     <td><%=result.getX()%>

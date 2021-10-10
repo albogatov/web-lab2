@@ -45,7 +45,7 @@ public class AreaCheckServlet extends HttpServlet {
             Date date = new Date(System.currentTimeMillis());
             String currentTime = formatter.format(date);
             long executionTime = System.nanoTime() - begin;
-            Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, TimeUnit.MILLISECONDS.convert(executionTime, TimeUnit.NANOSECONDS), hit);
+            Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, executionTime , hit);
             ArrayList<Result> results;
             if (session.getAttribute("results") == null) {
                 results = new ArrayList<>();

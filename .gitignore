@@ -1,3 +1,6 @@
 *.iml
 .idea/
 src/main/webapp/css/singlePageTemplate.css
+js/jquery-3.6.0.min.js
+js/jquery.svg.js
+media/

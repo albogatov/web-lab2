@@ -76,7 +76,8 @@
                 %>
                 <circle cx="<%=180+150*result.getX()/Math.abs(result.getR())%>"
                         cy="<%=180-150*result.getY()/Math.abs(result.getR())%>"
-                        data-x="<%=result.getX()%>" data-y="<%=result.getY()%>" data-r="<%=result.getR()%>" r="5"
+                        data-x="<%=result.getX()%>" data-y="<%=result.getY()%>" data-r="<%=result.getR()%>"
+                        data-hit="<%=result.getHit()%>" r="5"
                         name="pointer" class="pointer"></circle>
                 <%
                     }

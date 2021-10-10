@@ -5,10 +5,10 @@ public class Result {
     private final double y;
     private final double r;
     private final String currTime;
-    private final long executionTime;
+    private final double executionTime;
     private final boolean hit;
 
-    public Result(double x, double y, double r, String currTime, long executionTime, boolean hit) {
+    public Result(double x, double y, double r, String currTime, double executionTime, boolean hit) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -33,7 +33,7 @@ public class Result {
         return currTime;
     }
 
-    public long getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 

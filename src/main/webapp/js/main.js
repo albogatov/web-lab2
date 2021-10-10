@@ -87,16 +87,23 @@ $(function () {
 
     $('input[type=checkbox][name=r]').change(function () {
         let pointers = $("[name='pointer']");
-        let curR = $('input[type=checkbox][name=r]:checked').val();
+        let curR = parseFloat($('input[type=checkbox][name=r]:checked').val());
         let initX;
         let initY;
         let moveX;
         let moveY;
+        let initR;
+        let hit;
         for (let i = 0; i < pointers.length; i++) {
             initX = pointers[i].dataset.x;
             initY = pointers[i].dataset.y;
+            initR = pointers[i].dataset.r;
+            hit = pointers[i].dataset.hit;
             moveX = 180 + 150 * initX / Math.abs(curR);
             moveY = 180 - 150 * initY / Math.abs(curR);
+            if (initR == curR && hit == "true") {
+                pointers[i].style.fill = "#A4CC84";
+            } else pointers[i].style.fill = "#cca484";
             $(pointers[i]).animate({
                 cx: moveX,
                 cy: moveY

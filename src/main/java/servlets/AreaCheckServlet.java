@@ -45,7 +45,7 @@ public class AreaCheckServlet extends HttpServlet {
             Date date = new Date(System.currentTimeMillis());
             String currentTime = formatter.format(date);
             long executionTime = System.nanoTime() - begin;
-            Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, executionTime , hit);
+            Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, executionTime * Math.pow(10, -9), hit);
             ArrayList<Result> results;
             if (session.getAttribute("results") == null) {
                 results = new ArrayList<>();
@@ -55,7 +55,7 @@ public class AreaCheckServlet extends HttpServlet {
             results.add(result);
             session.setAttribute("results", results);
         }
-        req.getRequestDispatcher("/index.jsp").forward(req, res);
+        res.sendRedirect("/Lab2-1.0-SNAPSHOT");
     }
 
     private boolean validateData(String x, String y, String r) {
@@ -100,7 +100,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     private boolean checkSecondQuarter(double x, double y, double r) {
-        return y >= 0 && x <= 0 && Math.abs(x) <= r && x <= (r - y) && y <= r;
+        return y >= 0 && x <= 0 && Math.abs(x) <= r && y <= (x + r) && y <= r;
     }
 
     private boolean checkThirdQuarter(double x, double y, double r) {

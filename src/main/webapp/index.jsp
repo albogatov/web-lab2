@@ -1,6 +1,10 @@
 <%@ page import="data.Result" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%!
+    public static final int GRAPH_WIDTH = 360;
+    public static final int INDENT = 30;
+%>
 <!DOCTYPE html>
 <html lang="en-US">
 <%
@@ -74,8 +78,8 @@
                     for (int i = 0; i < results.size(); i++) {
                         Result result = results.get(i);
                 %>
-                <circle cx="<%=180+150*result.getX()/Math.abs(result.getR())%>"
-                        cy="<%=180-150*result.getY()/Math.abs(result.getR())%>"
+                <circle cx="<%=GRAPH_WIDTH/2+(GRAPH_WIDTH/2-INDENT)*result.getX()/Math.abs(result.getR())%>"
+                        cy="<%=GRAPH_WIDTH/2-(GRAPH_WIDTH/2-INDENT)*result.getY()/Math.abs(result.getR())%>"
                         data-x="<%=result.getX()%>" data-y="<%=result.getY()%>" data-r="<%=result.getR()%>"
                         data-hit="<%=result.getHit()%>" r="5"
                         name="pointer" class="pointer"></circle>
@@ -123,11 +127,11 @@
                         <td class="input-r">
                             <fieldset id="r-field">
                                 <label>Select R value</label>
-                                <input type="checkbox" name="r" value="1">1
-                                <input type="checkbox" name="r" value="2">2
-                                <input type="checkbox" name="r" value="3">3
-                                <input type="checkbox" name="r" value="4">4
-                                <input type="checkbox" name="r" value="5">5
+                                <input id="1" type="checkbox" name="r" value="1">1
+                                <input id="2" type="checkbox" name="r" value="2">2
+                                <input id="3" type="checkbox" name="r" value="3">3
+                                <input id="4" type="checkbox" name="r" value="4">4
+                                <input id="5" type="checkbox" name="r" value="5">5
                             </fieldset>
                         </td>
                     </tr>
@@ -199,18 +203,18 @@
             </table>
         </td>
     </tr>
-    <tr>
-        <table>
-            <tr>
-                <td>
-                    <div class="cursor" name="cursed">
-                        <div class="cursor line1" name="cursed"></div>
-                        <div class="cursor line2" name="cursed"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </tr>
+<%--    <tr>--%>
+<%--        <table>--%>
+<%--            <tr>--%>
+<%--                <td>--%>
+<%--                    <div class="cursor" name="cursed">--%>
+<%--                        <div class="cursor line1" name="cursed"></div>--%>
+<%--                        <div class="cursor line2" name="cursed"></div>--%>
+<%--                    </div>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
+<%--        </table>--%>
+<%--    </tr>--%>
 </table>
 </body>
 </html>

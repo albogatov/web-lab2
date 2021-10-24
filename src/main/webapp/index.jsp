@@ -1,5 +1,6 @@
 <%@ page import="data.Result" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%!
     public static final int GRAPH_WIDTH = 360;
@@ -8,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <%
-    ArrayList<Result> results = new ArrayList<>();
+    List<Result> results = new ArrayList<>();
     if (request.getSession().getAttribute("results") != null) {
         results = (ArrayList<Result>) request.getSession().getAttribute("results");
     }
@@ -18,11 +19,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web Lab #2</title>
-    <script src="js/jquery-3.6.0.min.js"></script>
+<%--    <script src="js/jquery-3.6.0.min.js"></script>--%>
     <script src="js/main.js"></script>
-    <script src="js/jquery.svg.js"></script>
+<%--    <script src="js/jquery.svg.js"></script>--%>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.svg.css">
+<%--    <link rel="stylesheet" type="text/css" href="css/jquery.svg.css">--%>
 </head>
 <body>
 <table id="grid" width="100%">
@@ -178,6 +179,8 @@
                 </thead>
                 <tbody>
                 <%
+//                    if(results != null && results.size() > 0)
+//                    System.out.println(results.get(0).getExecutionTime());
                     for (int i = 0; i < results.size(); i++) {
                         Result result = results.get(i);
                 %>

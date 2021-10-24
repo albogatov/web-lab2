@@ -5,7 +5,7 @@ public class Result {
     private final double y;
     private final double r;
     private final String currTime;
-    private final double executionTime;
+    private double executionTime;
     private final boolean hit;
 
     public Result(double x, double y, double r, String currTime, double executionTime, boolean hit) {
@@ -35,6 +35,10 @@ public class Result {
 
     public double getExecutionTime() {
         return executionTime;
+    }
+
+    public void setExecutionTime(double executionTime) {
+        this.executionTime = executionTime;
     }
 
     public boolean getHit() {

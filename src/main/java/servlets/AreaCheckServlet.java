@@ -1,6 +1,7 @@
 package servlets;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,13 +13,14 @@ import data.Result;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        long begin = System.nanoTime();
+//        long begin = System.nanoTime();
+//        System.out.println("BEGIN CHECK");
         String xVal;
         String yVal;
         String rVal;
@@ -34,7 +36,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-
+        session.setAttribute("validity", "false");
         boolean isValid = validateData(xVal, yVal, rVal);
         if (isValid) {
             double x = Double.parseDouble(xVal);
@@ -44,9 +46,10 @@ public class AreaCheckServlet extends HttpServlet {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
             Date date = new Date(System.currentTimeMillis());
             String currentTime = formatter.format(date);
-            long executionTime = System.nanoTime() - begin;
+//            long executionTime = System.nanoTime() - begin;
+            long executionTime = 0;
             Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, executionTime * Math.pow(10, -9), hit);
-            ArrayList<Result> results;
+            List<Result> results;
             if (session.getAttribute("results") == null) {
                 results = new ArrayList<>();
             } else {
@@ -54,7 +57,9 @@ public class AreaCheckServlet extends HttpServlet {
             }
             results.add(result);
             session.setAttribute("results", results);
+            session.setAttribute("validity", "true");
         }
+//        System.out.println("END CHECK");
         res.sendRedirect("/Lab2-1.0-SNAPSHOT");
     }
 

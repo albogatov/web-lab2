@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.checked = true;
         });
         checkboxes[i].addEventListener("click", function () {
-            console.log("listening");
             let pointers = document.querySelectorAll("[name='pointer']");
             let curR = parseFloat(document.querySelector('input[type=checkbox][name=r]:checked').value);
             let initX;
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 pointers[i].setAttribute("cx", moveX);
                 pointers[i].setAttribute("cy", moveY);
             }
-            console.log("listened");
         })
     }
     document.getElementById("send").addEventListener("click", function (event) {
@@ -75,7 +73,7 @@ function calculateSectionOne(x, y, r) {
 }
 
 function calculateSectionTwo(x, y, r) {
-    return y >= 0 && x <= 0 && Math.abs(x) <= r && y <= (x + r) && y <= r;
+    return y >= 0 && x <= 0 && Math.abs(x) <= r && y <= (parseFloat(x) + parseFloat(r)) && y <= r;
 }
 
 function calculateSectionThree(x, y, r) {

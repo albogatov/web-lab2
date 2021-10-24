@@ -15,8 +15,21 @@
         <servlet-name>AreaCheckServlet</servlet-name>
         <servlet-class>servlets.AreaCheckServlet</servlet-class>
     </servlet>
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>AreaCheckServlet</servlet-name>-->
+    <!--        <url-pattern>/check</url-pattern>-->
+    <!--    </servlet-mapping>-->
     <servlet>
         <servlet-name>ClearTableServlet</servlet-name>
         <servlet-class>servlets.ClearTableServlet</servlet-class>
     </servlet>
+    <filter>
+        <filter-name>execFilter</filter-name>
+        <filter-class>filter.ExecFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>execFilter</filter-name>
+        <servlet-name>ControllerServlet</servlet-name>
+    </filter-mapping>
+
 </web-app>
